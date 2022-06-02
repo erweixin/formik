@@ -694,6 +694,28 @@ describe('<Formik>', () => {
         });
       });
 
+      it('resetFieldValue sets value by key', async () => {
+        const { getProps, rerender } = renderFormik<Values>();
+
+        act(() => {
+          getProps().setFieldValue('name', 'ian');
+          getProps().setFieldError('name', 'name-error')
+        });
+        rerender();
+        await waitFor(() => {
+          expect(getProps().values.name).toEqual('ian');
+          expect(getProps().errors.name).toEqual('name-error');
+        });
+        act(() => {
+          getProps().resetFieldValue('name');
+        });
+        rerender();
+        await waitFor(() => {
+          expect(getProps().values.name).toEqual(InitialValues.name);
+          expect(getProps().errors.name).toBeUndefined();
+        });
+      });
+
       it('setFieldValue should run validations when validateOnChange is true (default)', async () => {
         const validate = jest.fn(() => ({}));
         const { getProps, rerender } = renderFormik({ validate });

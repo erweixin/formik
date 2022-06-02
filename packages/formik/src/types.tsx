@@ -93,6 +93,8 @@ export interface FormikHelpers<Values> {
   ) => void;
   /** Set value of form field directly */
   setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void;
+  /** reset value of form field directly */
+  resetFieldValue: (field: string) => void;
   /** Set error message of a form field directly */
   setFieldError: (field: string, message: string | undefined) => void;
   /** Set whether field has been touched directly */

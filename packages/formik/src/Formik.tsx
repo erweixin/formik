@@ -587,6 +587,13 @@ export function useFormik<Values extends FormikValues = FormikValues>({
     }
   );
 
+  const resetFieldValue = useEventCallback(
+    (field: string) => {
+      setFieldValue(field, getIn(initialValues.current, field), false);
+      setFieldError(field, undefined);
+    }
+  );
+
   const executeChange = React.useCallback(
     (eventOrTextValue: string | React.ChangeEvent<any>, maybePath?: string) => {
       // By default, assume that the first argument is a string. This allows us to use
@@ -837,6 +844,7 @@ export function useFormik<Values extends FormikValues = FormikValues>({
     setFieldError,
     setFieldTouched,
     setFieldValue,
+    resetFieldValue,
     setStatus,
     setSubmitting,
     setTouched,
@@ -962,6 +970,7 @@ export function useFormik<Values extends FormikValues = FormikValues>({
     setFormikState,
     setFieldTouched,
     setFieldValue,
+    resetFieldValue,
     setFieldError,
     setStatus,
     setSubmitting,
